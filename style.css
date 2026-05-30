@@ -1,0 +1,292 @@
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Roboto+Mono:wght@400;700&display=swap');
+
+/* ===============================
+   COLOR SYSTEM
+   =============================== */
+:root {
+  --olive: #6B8E23;
+  --olive-dark: #3f4f1f;
+  --gunmetal: #141816;
+  --steel: #2e352f;
+
+  --text-main: #e5e7eb;
+  --text-muted: #a1a1aa;
+
+  --success: #22c55e;
+  --danger: #dc2626;
+  --offline: #64748b;
+}
+
+/* ===============================
+   RESET
+   =============================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===============================
+   BODY
+   =============================== */
+body {
+  min-height: 100vh;
+  font-family: 'Roboto Mono', monospace;
+  color: var(--text-main);
+  background: #0f1412;
+  overflow-x: hidden;
+}
+
+/* ===============================
+   MOVING BACKGROUND (100% WORKING)
+   =============================== */
+.bg-anim {
+  position: fixed;
+  inset: -200%;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(107,142,35,0.30) 0px,
+    rgba(107,142,35,0.30) 4px,
+    transparent 4px,
+    transparent 80px
+  );
+  animation: bgMove 6s linear infinite;
+  z-index: -2;
+  pointer-events: none;
+}
+
+@keyframes bgMove {
+  from { transform: translate(0,0); }
+  to   { transform: translate(450px,450px); }
+}
+
+/* ===============================
+   APP LAYOUT
+   =============================== */
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ===============================
+   SIDEBAR
+   =============================== */
+.sidebar {
+  width: 280px;
+  background: rgba(20,24,22,0.92);
+  border-right: 3px solid var(--olive);
+  padding: 30px 20px;
+}
+
+.sidebar h2 {
+  font-family: 'Black Ops One', cursive;
+  font-size: 1.6rem;
+  color: var(--olive);
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+  border-bottom: 2px solid var(--olive);
+  padding-bottom: 10px;
+}
+
+.sidebar nav a {
+  display: block;
+  padding: 14px;
+  margin-bottom: 6px;
+  color: var(--text-main);
+  font-weight: bold;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  transition: all 0.25s ease;
+}
+
+.sidebar nav a:hover,
+.sidebar nav a.active {
+  background: var(--olive);
+  color: #000;
+  border: 1px solid #fff;
+  clip-path: polygon(0 0, 96% 0, 100% 22%, 100% 100%, 4% 100%, 0 78%);
+}
+
+/* ===============================
+   CONTENT
+   =============================== */
+.content {
+  flex: 1;
+  padding: 40px;
+  background: rgba(0,0,0,0.35);
+}
+
+/* ===============================
+   HEADER
+   =============================== */
+.topbar h1 {
+  font-family: 'Black Ops One', cursive;
+  font-size: 2.6rem;
+  text-shadow: 3px 3px 0 var(--olive);
+  margin-bottom: 40px;
+}
+
+/* ===============================
+   DASHBOARD GRID
+   =============================== */
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 28px;
+}
+
+/* ===============================
+   CARDS (TRANSPARENT)
+   =============================== */
+.device-card,
+.info-card,
+.system-info {
+  background: rgba(46,53,47,0.78);
+  border: 3px solid var(--olive);
+  padding: 26px;
+  position: relative;
+  box-shadow:
+    inset 0 0 18px rgba(0,0,0,0.7),
+    0 10px 30px rgba(0,0,0,0.7);
+  animation: cardIn 0.4s ease forwards;
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* RIVETS */
+.device-card::before,
+.device-card::after {
+  content: "●";
+  position: absolute;
+  color: var(--olive);
+  font-size: 14px;
+}
+.device-card::before { top: 6px; left: 6px; }
+.device-card::after  { bottom: 6px; right: 6px; }
+
+/* ===============================
+   TITLES
+   =============================== */
+.device-card h3 {
+  font-family: 'Black Ops One', cursive;
+  color: #f97316;
+  margin-bottom: 20px;
+}
+
+/* ===============================
+   STATUS
+   =============================== */
+.status-box span {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.status-box div {
+  margin-top: 10px;
+  padding: 12px;
+  font-weight: bold;
+  text-align: center;
+  border: 2px solid rgba(255,255,255,0.15);
+}
+
+/* STATES */
+.online {
+  background: var(--success);
+  color: #000;
+}
+
+.offline {
+  background: #450a0a;
+  color: #fecaca;
+  border-color: #fecaca;
+}
+
+.safe {
+  background: #14532d;
+  color: #bbf7d0;
+}
+
+/* EMERGENCY – VERY OBVIOUS */
+.emergency {
+  background: var(--danger);
+  color: #fff;
+  animation: emergencyPulse 0.9s infinite;
+}
+
+@keyframes emergencyPulse {
+  0%   { box-shadow: 0 0 0 rgba(220,38,38,0); }
+  50%  { box-shadow: 0 0 35px rgba(220,38,38,1); }
+  100% { box-shadow: 0 0 0 rgba(220,38,38,0); }
+}
+
+/* ===============================
+   IMAGE
+   =============================== */
+.system-image {
+  width: 100%;
+  border: 5px solid #000;
+  filter: sepia(0.3) contrast(1.2) brightness(0.85);
+}
+
+/* ===============================
+   RESPONSIVE
+   =============================== */
+@media (max-width: 768px) {
+  .app {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 3px solid var(--olive);
+  }
+
+  .content {
+    padding: 20px;
+  }
+}
+/* ===============================
+   SIDEBAR TOGGLE BUTTON
+   =============================== */
+.sidebar-toggle {
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  z-index: 1000;
+  background: var(--olive);
+  color: #000;
+  border: none;
+  font-size: 22px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-family: 'Black Ops One', cursive;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+}
+
+/* ===============================
+   SIDEBAR SLIDE BEHAVIOR
+   =============================== */
+.sidebar {
+  transition: transform 0.35s ease;
+}
+
+/* CLOSED STATE */
+.sidebar.closed {
+  transform: translateX(-100%);
+}
+
+/* MOBILE DEFAULT CLOSED */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    z-index: 999;
+  }
+}

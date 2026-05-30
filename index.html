@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>IoT Emergency Communication System</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- MQTT -->
+  <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <h2>Device<br>Monitoring</h2>
+    <nav>
+      <a class="active" id="dashboardLink">Dashboard</a>
+      <a>Mesh Nodes</a>
+      <a>Emergency Alerts</a>
+      <a id="systemInfoLink">System Info</a>
+    </nav>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <div class="content">
+
+    <!-- HEADER -->
+    <header class="topbar">
+      <h1>IoT-Based Emergency Communication System</h1>
+    </header>
+
+    <!-- DASHBOARD -->
+    <section class="dashboard" id="dashboardSection">
+
+      <!-- DEVICE 1 -->
+      <div class="device-card">
+        <h3>ESP32_Device1</h3>
+
+        <div class="status-box">
+          <span>Node Status</span>
+          <div id="status" class="offline">OFFLINE</div>
+        </div>
+
+        <div class="status-box">
+          <span>Emergency State</span>
+          <div id="emergencyStatus" class="safe">SAFE</div>
+        </div>
+      </div>
+
+      <!-- DEVICE 2 -->
+      <div class="device-card">
+        <h3>ESP32_Device2</h3>
+
+        <div class="status-box">
+          <span>Node Status</span>
+          <div id="d2Status" class="offline">OFFLINE</div>
+        </div>
+
+        <div class="status-box">
+          <span>Emergency State</span>
+          <div id="d2Emergency" class="safe">SAFE</div>
+        </div>
+      </div>
+
+      <!-- DEVICE 3 (EMPTY / FUTURE NODE) -->
+      <div class="device-card placeholder">
+        <h3>+ Add Device</h3>
+
+        <div class="status-box">
+          <span>Status</span>
+          <div class="offline">NOT CONFIGURED</div>
+        </div>
+
+        <div class="status-box">
+          <span>Info</span>
+          <div class="safe">Future Node (D3)</div>
+        </div>
+      </div>
+
+      <!-- INFO CARD -->
+      <div class="info-card key-features">
+        <h3>Key Features</h3>
+        <p>
+          • Infrastructure-free mesh networking<br>
+          • Real-time emergency alert propagation<br>
+          • Secure and authenticated communication<br>
+          • LED & buzzer based local alerts<br>
+          • Scalable and energy-efficient design
+        </p>
+      </div>
+
+    </section>
+
+    <!-- SYSTEM INFO SECTION -->
+    <section class="system-info" id="systemInfoSection" style="display:none;">
+
+      <h2>System Information</h2>
+
+      <p>
+        The proposed system is an <strong>IoT-enabled Wireless Emergency Alert and
+        Monitoring Network</strong> developed using multiple ESP32 devices.
+        Each ESP32 functions as an independent sensing node capable of detecting
+        emergency events such as button press alerts, sensor warnings, or abnormal activity.
+      </p>
+
+      <h3>Operation WITH Internet</h3>
+      <p>
+        When internet connectivity is available, ESP32 mesh nodes communicate locally
+        while simultaneously sending data to a cloud-based web dashboard. This enables
+        real-time monitoring, node status visualization, and precise identification
+        of emergency locations.
+      </p>
+
+      <h3>Operation WITHOUT Internet</h3>
+      <p>
+        In the absence of internet connectivity, the system automatically switches
+        to mesh-only mode. ESP32 devices exchange emergency alerts using multi-hop
+        ESP-to-ESP communication. Local alerts are generated through LEDs and buzzers,
+        ensuring uninterrupted operation.
+      </p>
+
+      <div class="image-wrapper">
+        <img src="images/oneflow.png"
+             alt="ESP32 Emergency Communication System Architecture"
+             class="system-image">
+      </div>
+
+    </section>
+
+  </div>
+</div>
+
+<!-- UI JS -->
+<script>
+  const dashboardLink = document.getElementById("dashboardLink");
+  const systemInfoLink = document.getElementById("systemInfoLink");
+  const dashboardSection = document.getElementById("dashboardSection");
+  const systemInfoSection = document.getElementById("systemInfoSection");
+
+  systemInfoLink.onclick = () => {
+    dashboardSection.style.display = "none";
+    systemInfoSection.style.display = "block";
+  };
+
+  dashboardLink.onclick = () => {
+    systemInfoSection.style.display = "none";
+    dashboardSection.style.display = "grid";
+  };
+</script>
+
+<!-- MQTT JS -->
+<script src="script.js"></script>
+
+
+</body>
+</html>
